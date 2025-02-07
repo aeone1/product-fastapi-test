@@ -1,7 +1,7 @@
 # Run Migration
 
-python src/\__main\__.py migratedb
+python src/\_\_main\_\_.py migratedb
 
 # Run the APP
 
-python src/\__main\__.py runapi
+python src/\_\_main\_\_.py runapi
