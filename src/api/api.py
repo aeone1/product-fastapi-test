@@ -29,4 +29,5 @@ api_router.include_router(
     products_router,
     prefix="/products",
     tags=["products"],
+    include_in_schema=True
 )
