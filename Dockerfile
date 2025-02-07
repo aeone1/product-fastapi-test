@@ -31,5 +31,4 @@ COPY . .
 EXPOSE 8000
 
 # Default command to run the API.
-# To run migrations, you can override this command (see docker-compose instructions below).
 CMD ["python", "src/__main__.py", "runapi"]
