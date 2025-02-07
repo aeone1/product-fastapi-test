@@ -18,5 +18,5 @@ class Product(BaseModel):
     in_stock: bool
     created_at: Optional[datetime]
     
-    def __hash__(self):
-        return hash((self.id, self.name))
+    # def __hash__(self):
+    #     return hash((self.id, self.name))

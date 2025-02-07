@@ -25,9 +25,9 @@ api_router = APIRouter(
     },
 )
 
-api_router.include_router(
-    products_router,
-    prefix="/products",
-    tags=["products"],
-)
+# api_router.include_router(
+#     products_router,
+#     prefix="/products",
+#     tags=["products"],
+# )
 

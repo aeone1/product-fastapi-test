@@ -3,15 +3,20 @@ Create Session
 """
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 
 from config import Settings
 
+# Create engine only once
+engine = create_engine(Settings.db.dsn)
 
-def session():
+# Create a single session factory
+SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 
-    Session = sessionmaker(
-        bind=create_engine(Settings.db.dsn)
-    )
+# Create a scoped session
+ScopedSession = scoped_session(SessionLocal)
 
-    return Session
+def session_made():
+
+    """Returns a new session instance."""
+    return ScopedSession
