@@ -22,7 +22,7 @@ class ProductCreate(Product):
     created_at: Optional[datetime] = None
 
 
-class ProductUpdate(Product):
+class ProductUpdate(BaseModel):
     id: UUID
     name: Optional[str] = None
     description: Optional[str] = None
@@ -36,3 +36,7 @@ class ProductsGetFilter(BaseModel):
     sort_by_created_at: Optional[SortEnum] = None
     sort_by_name: Optional[SortEnum] = None
     sort_by_description: Optional[SortEnum] = None
+
+class ErrorResponse(BaseModel):
+    code: int
+    message: str

@@ -24,7 +24,8 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - app_data:/app  # Persistent storage for migrations and code changes
+      - ./src:/app/src
+      # - app_data:/app  # Persistent storage for migrations and code changes
     command: ["python", "src/__main__.py", "runapi"]
 
 volumes:

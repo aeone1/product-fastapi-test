@@ -13,10 +13,10 @@ class Product(BaseModel):
     """Product App Schema"""
     id: Optional[UUID] = Field(default_factory=uuid4)
     name: str
-    description: Optional[str]
+    description: Optional[str] = None
     price: float
     in_stock: bool
-    created_at: Optional[datetime]
-    
-    # def __hash__(self):
-    #     return hash((self.id, self.name))
+    created_at: Optional[datetime] = Field(default_factory=datetime.now)
+
+    def __hash__(self):
+        return hash((self.id, self.name))

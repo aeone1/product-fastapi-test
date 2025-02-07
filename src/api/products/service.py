@@ -1,5 +1,6 @@
 
 from uuid import UUID
+from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.product_service import ProductSaveService
@@ -7,24 +8,39 @@ from app.product_service import ProductUpdateService
 from app.product_service import ProductDeleteService
 from app.product_service import ProductGetService
 from app.product_service import ProductsGetService
+from app.product_service.exceptions import ProductNameAlreadyExists
 from app.product_service.schema import Product
 
-from .models import ProductCreate, ProductPagination, ProductUpdate, ProductsGetFilter
+from .models import ErrorResponse, ProductCreate, ProductPagination, ProductUpdate, ProductsGetFilter
+
 
 
 def create(db_session: Session, product_in: ProductCreate) -> Product:
     """Creates a product"""
-    product_save_service = ProductSaveService(db_session)
-    product = product_save_service.save(**product_in.__dict__)
-    product = Product(**product.__dict__)
+    try:
+        product_save_service = ProductSaveService(db_session)
+        product_data = product_in.model_dump(exclude_unset=True, exclude={"id"})
+        product = product_save_service.save(Product(**product_data))
+        product = Product(**product.__dict__)
 
-    return product
+        return product
+    except ProductNameAlreadyExists as ex:
+        error_response = ErrorResponse(
+            code=400,
+            message=f"Product name '{product_in.name}' already exists."
+        )
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=error_response.model_dump()
+        )
 
 
 def update(db_session: Session, product_to_update: ProductUpdate) -> Product:
     """Updates a product"""
     product_save_service = ProductUpdateService(db_session)
-    product = product_save_service.update(**product_to_update.__dict__)
+    product_data = product_to_update.model_dump(exclude_unset=True)
+    print(f"{product_data=}")
+    product = product_save_service.update(**product_data)
 
     return product
 
