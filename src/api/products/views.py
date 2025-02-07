@@ -17,7 +17,7 @@ def get_db(request: Request) -> Session:
     return request.state.db
 
 @router.get("", response_model=ProductPagination)
-def get_products(product_get_filter: ProductsGetFilter, db_session: Session = Depends(get_db)):
+def get_products(product_get_filter: ProductsGetFilter = Depends(), db_session: Session = Depends(get_db)):
     """Get all products."""
     return get_all(db_session, product_get_filter)
 

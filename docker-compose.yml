@@ -23,9 +23,11 @@ services:
       DATABASE_URL: "postgres://postgres:postgres@db:5432/products_db"
     ports:
       - "8080:8080"
-    # Default command: start the API.
-    # To run migrations instead, override this command.
+    volumes:
+      - app_data:/app  # Persistent storage for migrations and code changes
     command: ["python", "src/__main__.py", "runapi"]
 
 volumes:
   postgres_data:
+  app_data:
+

@@ -15,23 +15,24 @@ class ProductPagination(BaseModel):
 
 
 class ProductCreate(Product):
-    id: Optional[UUID]
+    id: Optional[UUID] = None
     name: str
-    description: Optional[str]
+    description: Optional[str] = None
     price: float
+    created_at: Optional[datetime] = None
 
 
 class ProductUpdate(Product):
     id: UUID
-    name: Optional[str]
-    description: Optional[str]
-    price: Optional[float]
-    in_stock: Optional[bool]
+    name: Optional[str] = None
+    description: Optional[str] = None
+    price: Optional[float] = None
+    in_stock: Optional[bool] = None
 
 
 class ProductsGetFilter(BaseModel):
     page_number: Optional[int] = 1
     page_size: Optional[int] = 10
-    sort_by_created_at: Optional[SortEnum]
-    sort_by_name: Optional[SortEnum]
-    sort_by_description: Optional[SortEnum]
+    sort_by_created_at: Optional[SortEnum] = None
+    sort_by_name: Optional[SortEnum] = None
+    sort_by_description: Optional[SortEnum] = None
