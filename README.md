@@ -1,6 +1,6 @@
 # Run Migration
 
-python src/\__main\__.py migratedb
+python src/\_\_main\_\_.py migratedb
 
 # Run the APP
 
@@ -11,3 +11,4 @@ python src/__main__.py runapi
 - [ ] [docker-compose build]
 - [ ] [docker-compose run app python src/__main__.py migratedb]
 - [ ] [docker-compose up]
+python src/\_\_main\_\_.py runapi
