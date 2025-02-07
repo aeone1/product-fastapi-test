@@ -29,9 +29,9 @@ class BaseSettings(PydanticBaseSettings):
 
 class DatabaseSettings(BaseSettings):
     port: int = Field(default=5432, alias="POSTGRES_PORT")
-    name: str = Field(default="product", alias="POSTGRES_DB")
+    name: str = Field(default="products_db", alias="POSTGRES_DB")
     user: str = Field(default="product", alias="POSTGRES_USER")
-    host: str = Field(default="127.0.0.1", alias="POSTGRES_HOST")
+    host: str = Field(default="db", alias="POSTGRES_HOST")
     password: str = Field(default="product", alias="POSTGRES_PASSWORD")
 
     @property
