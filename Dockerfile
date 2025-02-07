@@ -18,7 +18,7 @@ RUN pip install "poetry==$POETRY_VERSION"
 WORKDIR /app
 
 # Copy the Poetry configuration files first (for caching dependency installation)
-COPY pyproject.toml poetry.lock ./
+COPY pyproject.toml poetry.lock* ./
 
 # Configure Poetry to install dependencies globally (without virtualenv) and install production dependencies only.
 RUN poetry config virtualenvs.create false \
@@ -27,8 +27,8 @@ RUN poetry config virtualenvs.create false \
 # Copy the rest of the application code
 COPY . .
 
-# Expose the port (assuming your API listens on 8000)
-EXPOSE 8000
+# Expose the port
+EXPOSE 8080
 
 # Default command to run the API.
 CMD ["python", "src/__main__.py", "runapi"]
