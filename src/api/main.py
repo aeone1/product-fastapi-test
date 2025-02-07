@@ -69,3 +69,4 @@ async def db_session_middleware(request: Request, call_next):
 # we add all API routes to the Web API framework
 api.include_router(api_router)
 
+app.mount("/api/v1", app=api)
