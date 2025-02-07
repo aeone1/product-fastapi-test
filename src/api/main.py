@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.orm import scoped_session
 
 from .api import api_router
-from .session import session as session_made
+from .session import session_made
 
 
 async def not_found(request, exc):
@@ -49,18 +49,20 @@ api = FastAPI(
     redoc_url="/docs",
 )
 
-@api.middleware("http")
+@app.middleware("http")
 async def db_session_middleware(request: Request, call_next):
-    # request_id = str(uuid1()) # for tracing later
+    """Middleware to attach a database session to each request."""
+    session_factory = session_made()  # Get the session factory
+    session = session_factory()  # Create a new session
+    request.state.db = session  # Attach session to request
 
     try:
-        session = scoped_session(session_made())
-        request.state.db = session()
         response = await call_next(request)
     except Exception as e:
+        session.rollback()  # Rollback transaction on error
         raise e from None
     finally:
-        request.state.db.close()
+        session.close()  # Ensure session is closed
 
     return response
 
