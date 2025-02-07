@@ -1,6 +1,6 @@
 # Run Migration
 
-python src/____main____.py migratedb
+python src/\__main\__.py migratedb
 
 # Run the APP
 
