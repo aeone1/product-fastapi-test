@@ -18,7 +18,7 @@ RUN pip install "poetry==$POETRY_VERSION"
 WORKDIR /app
 
 # Copy the Poetry configuration files first (for caching dependency installation)
-COPY pyproject.toml poetry.lock ./
+COPY pyproject.toml poetry.lock* ./
 
 # Configure Poetry to install dependencies globally (without virtualenv) and install production dependencies only.
 RUN poetry config virtualenvs.create false \
