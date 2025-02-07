@@ -11,3 +11,4 @@ python src/\_\_main\_\_.py runapi
 - [ ] [docker-compose build]
 - [ ] [docker-compose run app python src/\_\_main\_\_.py migratedb]
 - [ ] [docker-compose up]
+
